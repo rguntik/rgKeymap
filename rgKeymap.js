@@ -30,17 +30,18 @@ const RgKeymap = keys => {
     };
 
     const keymapSearch = k => {
+        let waitingConf = objectMerge({}, data.keyArr);
         switch (typeof data.temp[k]) {
             case 'undefined':
-                data.temp = objectMerge({}, data.keyArr);
+                data.temp = waitingConf;
                 break;
             case 'number':
                 funcStorage[data.temp[k]]();
                 activeButtons = [];
-                data.temp = objectMerge({}, data.keyArr);
+                data.temp = waitingConf;
                 break;
             default:
-                data.temp = objectMerge(objectMerge({}, data.keyArr), data.temp[k]);
+                data.temp = objectMerge(waitingConf, data.temp[k]);
         }
     };
 
