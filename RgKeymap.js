@@ -1,3 +1,8 @@
+/**
+ * RgKeymap is a JavaScript class for easy creation and usage of hotkeys or key sequences in web applications.
+ * For the detailed documentation and usage guide, please visit the GitHub page:
+ * https://github.com/rguntik/rgKeymap
+ */
 class RgKeymap {
     constructor() {
         this.funcStorage = [];
