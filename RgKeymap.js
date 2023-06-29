@@ -42,12 +42,6 @@ class RgKeymap {
         return obj;
     }
 
-    normalizeKeys(keys) {
-        return keys
-            .flatMap(k => /^\+.*$/.test(k) ? k.replace(/^\+(.*)/, '$1,-$1').split(',') : [k])
-            .map(k => /^-?\w$/.test(k) ? k.toUpperCase().replace(/^(-?)(\w)$/, '$1Key$2') : k);
-    }
-
     keymapSearch(k, e) {
         let waitingConf = this.objectMerge({}, this.data.keyArr);
         switch (typeof this.data.temp[k]) {
@@ -82,7 +76,9 @@ class RgKeymap {
     }
 
     add(keys, callback) {
-        keys = this.normalizeKeys(keys);
+        keys = keys
+            .flatMap(k => /^\+.*$/.test(k) ? k.replace(/^\+(.*)/, '$1,-$1').split(',') : [k])
+            .map(k => /^-?\w$/.test(k) ? k.toUpperCase().replace(/^(-?)(\w)$/, '$1Key$2') : k);
 
         this.data.keyArr = this.objectMerge(this.data.keyArr, this.buildConfig([keys, callback]));
         this.data.temp = this.objectMerge({}, this.data.keyArr);
